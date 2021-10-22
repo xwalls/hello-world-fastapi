@@ -5,9 +5,9 @@ app = FastAPI()
 
 database = [1]
 
-@app.get("/")
+@app.get("/api/quack")
 def read_root():
-    return {"msg": "Hello xMoNtAiNx"}
+    return {"message": "Hello Hypesor!", "url":"https://random-d.uk/api/131.jpg"}
 
 # CRUD (CREATE,READ,UPDATE,DELETE)
 
@@ -29,4 +29,3 @@ def update_item(number: int, position: Optional[int] = -1):
 def delete_item(position: Optional[int] = -1):
     database.pop(position)
     return database
-    
