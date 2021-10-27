@@ -5,11 +5,11 @@ from pydantic import BaseModel
 app = FastAPI()
 
 #######################
-# Classes
+# CLASSES
 
 class Person(BaseModel): 
-    name: str
-    age: int 
+    name: Optional[str] = None
+    age: Optional[int] = None
     hair_color: Optional[str] = None
     is_married: Optional[bool] = None
 
@@ -17,12 +17,13 @@ class Person(BaseModel):
 #######################
 # DATABASE
 database = [1]
+persons_database = []
 
 ##################################################################
 # ROOT PATH OPERATION
 @app.get("/")
 def read_root():
-    return {"message": "Hello xxxxxxx!", "url":"https://random-d.uk/api/131.jpg"}
+    return {"message": "Welcome to the stream Hypesor and Ramskat!!", "url":"https://random-d.uk/api/131.jpg"}
 
 ##################################################################
 # CRUD (CREATE,READ,UPDATE,DELETE)
@@ -47,14 +48,21 @@ def delete_item(position: Optional[int] = -1):
 
 
 ##################################################################
+# PERSONS CRUD
+
+@app.get("/person/all")
+def get_persons():
+    return persons_database
+
 # Request and Response Body
 @app.post("/person/create")
 def create_person(person: Person = Body(...)):
+    persons_database.append(person)
     return person
 
 # Validations: Query Parameters
-@app.post("/person/create")
-def create_person(
+@app.post("/person/details")
+def details_person(
     name: str = Query(
         ..., 
         max_length=50,
@@ -71,6 +79,29 @@ def create_person(
 
     return {name:age}
 
-    
 ##################################################################
 # Validations: Path Parameters
+
+@app.get("/person/{person_id}")
+def person_by_id(person_id: int):
+    return persons_database[person_id]
+
+@app.delete("/persons/{person_id}")
+def delete_person(person_id: int):
+    persons_database.pop(person_id)
+    return persons_database
+
+@app.put("/persons/{person_id}/update")
+def update_person(person_id: int, new_person: Person = Body(...)):
+    stored_person = persons_database[person_id]
+    update_data = new_person.dict(exclude_unset=True)
+    updated_person = stored_person.copy(update=update_data)
+    persons_database[person_id] = updated_person
+
+    return updated_person
+
+##################################################################
+# Validations: Models
+
+##################################################################
+# Secial Data Types
