@@ -104,4 +104,4 @@ def update_person(person_id: int, new_person: Person = Body(...)):
 # Validations: Models
 
 ##################################################################
-# Secial Data Types
+# Special Data Types
