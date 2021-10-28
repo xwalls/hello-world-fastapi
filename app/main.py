@@ -1,6 +1,6 @@
 from typing import Optional
 from fastapi import FastAPI, Body, Query
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, EmailStr
 
 app = FastAPI()
 
@@ -10,8 +10,21 @@ app = FastAPI()
 class Person(BaseModel): 
     name: Optional[str] = None
     age: Optional[int] = None
-    hair_color: Optional[str] = None
-    is_married: Optional[bool] = None
+    hair_color: Optional[str] = Field(
+        None, 
+        max_length=50,
+        title="Person's hair color",
+        description="This is the person's hair color."
+    )
+    is_married: Optional[bool] = Field(
+        None, 
+        title="person's status",
+        description="This is the person's status."
+    )
+    email: EmailStr = Field(
+        title="person's email",
+        description="This is the person's email."
+    )
 
 
 #######################
