@@ -6,4 +6,4 @@ client = TestClient(app)
 def test_read_root():
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"message": "Welcome !!", "url":"https://random-d.uk/api/131.jpg"}
+    assert response.json() == {"message": "Welcome to the stream Hypesor and Ramskat!!", "url":"https://random-d.uk/api/131.jpg"}
