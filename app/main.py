@@ -115,6 +115,8 @@ def update_person(person_id: int, new_person: Person = Body(...)):
 
 ##################################################################
 # Validations: Models
+# https://pydantic-docs.helpmanual.io/usage/schema/
 
 ##################################################################
 # Special Data Types
+# https://pydantic-docs.helpmanual.io/usage/types/#urls
