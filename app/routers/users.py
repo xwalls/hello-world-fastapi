@@ -1,25 +1,25 @@
 from fastapi import APIRouter, Body
 from db import database
-from models.person import Person
+from models.user import User
 
 router = APIRouter(
-    prefix="/persons",
-    tags=["persons"],
+    prefix="/users",
+    tags=["users"],
     responses={404: {"description": "Not found"}})
 
 @router.get("/")
-def get_persons():
+def get_users():
     return database
 
 @router.post("/create")
-def create_person(person: Person = Body(...)):
-    database.append(person)
-    return person
+def create_user(user: user = Body(...)):
+    database.append(user)
+    return user
 
-@router.put("/{person_id}/update")
-def update_person(person_id: int, new_person: Person = Body(...)):
-    stored_person = database[person_id]
-    update_data = new_person.dict(exclude_unset=True)
+@router.put("/{user_id}/update")
+def update_user(user_id: int, new_user: user = Body(...)):
+    stored_user = database[user_id]
+    update_data = new_user.dict(exclude_unset=True)
     updated_person = stored_person.copy(update=update_data)
     database[person_id] = updated_person
     return updated_person

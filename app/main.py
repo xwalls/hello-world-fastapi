@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Body, Query
-from routers import persons
+from routers import users
 
 app = FastAPI()
-app.include_router(persons.router)
+app.include_router(users.router)
 
 @app.get("/")
 def read_root():
