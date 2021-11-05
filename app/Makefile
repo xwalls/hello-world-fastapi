@@ -1,4 +1,5 @@
 .PHONY: \
+	install \
 	run \
 	tests
 
