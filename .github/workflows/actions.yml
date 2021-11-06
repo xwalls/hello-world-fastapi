@@ -1,0 +1,19 @@
+name: Tests
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+          architecture: 'x64'
+      - name: Install dependencies
+        run: cd app && make install
+      - name: Check format
+        run: cd app && make check
+      - name: Check tests
+        run: cd app && make tests
